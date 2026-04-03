@@ -11,16 +11,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const prompt = `Você é um guia de turismo e lazer especialista no Brasil. Sugira atividades para:
-- Local: ${location}
-- Data: ${date}
-- Tipo preferido: ${type || 'qualquer coisa'}
-${extras ? `- Preferências extras: ${extras}` : ''}
+    const prompt = `Você é um guia de turismo. Responda APENAS com JSON válido, sem texto extra.
 
-Retorne APENAS um JSON válido, sem markdown, no seguinte formato:
-{"atividades":[{"nome":"Nome","categoria":"Categoria","descricao":"Descrição de 2-3 frases com dicas práticas relevantes para essa data e local.","dica":"Uma dica prática extra"}]}
+Local: ${location}
+Data: ${date}
+Tipo: ${type || 'qualquer coisa'}
+${extras ? `Extras: ${extras}` : ''}
 
-Gere 5 sugestões variadas e relevantes. Considere o clima da época, eventos típicos da região e o dia da semana.`;
+JSON esperado (5 itens, descrições curtas, máximo 80 caracteres cada):
+{"atividades":[{"nome":"Nome","categoria":"Cat","descricao":"Frase curta.","dica":"Dica curta."}]}`;
 
     const apiKey = process.env.GEMINI_API_KEY;
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
