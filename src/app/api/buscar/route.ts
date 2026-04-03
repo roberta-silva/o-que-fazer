@@ -15,11 +15,11 @@ export async function POST(req: NextRequest) {
 
 Local: ${location}
 Data: ${date}
-Tipo: ${type || 'qualquer coisa'}
-${extras ? `Extras: ${extras}` : ''}
+Tipo: ${type || "qualquer coisa"}
+${extras ? `Extras: ${extras}` : ""}
 
 JSON esperado (5 itens, descrições curtas, máximo 80 caracteres cada):
-{"atividades":[{"nome":"Nome","categoria":"Cat","descricao":"Frase curta.","dica":"Dica curta."}]}`;
+{"atividades":[{"nome":"Nome","categoria":"Cat","descricao":"Frase curta.","dica":"Dica curta.","lugar":"Nome do lugar ou endereço para buscar no maps"}]}`;
 
     const apiKey = process.env.GEMINI_API_KEY;
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
